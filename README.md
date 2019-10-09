@@ -1,2 +1,2 @@
 # taco-cloud
-Learning Spring
+Simple Spring Application
