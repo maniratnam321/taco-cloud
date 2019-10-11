@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud - Taco Designer</title>
+</head>
+
+
+<body>
+    <img th:src="@{/images/TacoIcon.png}">
+    <form method="post" th:object="${design}">
+        <div class="grid">
+            <div class="ingridient-group" id="wraps">
+                <h2>Design your wrap</h2>
+                <div th:each="ingredient: ${wrap}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}">
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
