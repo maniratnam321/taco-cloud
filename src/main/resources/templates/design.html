@@ -9,15 +9,43 @@
 
 <body>
     <img th:src="@{/images/TacoIcon.png}">
-    <form method="post" th:object="${design}">
+    <form method="POST" th:object="${design}">
         <div class="grid">
-            <div class="ingridient-group" id="wraps">
+            <div class="ingredient-group" id="wraps">
                 <h2>Design your wrap</h2>
                 <div th:each="ingredient: ${wrap}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                </div>
+
+                <h2>Select your sauce</h2>
+                <div th:each="ingredient: ${sauce}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                </div>
+
+                <h2>Pick your veggies</h2>
+                <div th:each="ingredient: ${veggies}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                </div>
+
+                <h2>Choose your protein</h2>
+                <div th:each="ingredient: ${protein}">
+                    <input type="checkbox" name="ingredients" th:value="${ingredient.id}" />
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                </div>
+
+                <h2>Top it with cheese</h2>
+                <div th:each="ingredient: ${cheese}">
+                    <input type="checkbox" name="ingredients" th:value="${ingredient.id}" />
                     <span th:text="${ingredient.name}">INGREDIENT</span>
                 </div>
             </div>
+
+            <h2>Name your taco : </h2>
+            <input type="text" th:field="*{name}" /><br>
+            <button type="submit">Submit your taco</button>
         </div>
     </form>
 
