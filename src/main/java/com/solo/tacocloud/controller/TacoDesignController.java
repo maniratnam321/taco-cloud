@@ -1,20 +1,22 @@
 package com.solo.tacocloud.controller;
 
 
-import com.solo.tacocloud.domain.Ingredient;
-import com.solo.tacocloud.domain.Taco;
+import com.solo.tacocloud.tacos.Ingredient;
+import com.solo.tacocloud.tacos.Taco;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.solo.tacocloud.domain.Ingredient.*;
+import static com.solo.tacocloud.tacos.Ingredient.Type;
 
 @Slf4j
 @Controller
@@ -33,10 +35,14 @@ public class TacoDesignController {
     }
 
     @PostMapping
-    public String processDesign(Taco designedTaco) {
+    public String processDesign(@Valid Taco designedTaco, Errors errors) {
+        if(errors.hasErrors()) {
+            log.warn("Entered taco design has validation errors: " + errors.getAllErrors().toString());
+            return "design";
+        }
         log.warn("Taco Design Page WIP");
         System.out.println("Taco: " + designedTaco.toString());
-        return "redirect:";
+        return "redirect:orders/form";
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {

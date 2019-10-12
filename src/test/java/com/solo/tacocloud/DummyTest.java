@@ -1,9 +1,7 @@
 package com.solo.tacocloud;
 
-import com.solo.tacocloud.domain.Ingredient;
+import com.solo.tacocloud.tacos.Ingredient;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
 public class DummyTest {
 
