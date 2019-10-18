@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -41,12 +40,12 @@ public class JdbcIngredientRepository implements IngredientRepository{
     }
 
     @Override
-    public boolean save(Ingredient ingredient) {
-        int update = jdbcTemplate.update("insert into ingredient(id, name, type) values (?, ?, ?)",
+    public Ingredient save(Ingredient ingredient) {
+        jdbcTemplate.update("insert into ingredient(id, name, type) values (?, ?, ?)",
                 ingredient.getId(),
                 ingredient.getName(),
                 ingredient.getType().name());
-        return update == 1;
+        return ingredient;
     }
 
     private Ingredient mapRowToIngredient(ResultSet resultSet, int rowNum) throws SQLException {

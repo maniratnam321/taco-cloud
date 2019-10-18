@@ -8,5 +8,5 @@ public interface IngredientRepository {
 
     Ingredient findOne(String id);
 
-    boolean save(Ingredient ingredient);
+    Ingredient save(Ingredient ingredient);
 }

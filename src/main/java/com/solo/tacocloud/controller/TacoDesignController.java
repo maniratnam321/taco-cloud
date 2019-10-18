@@ -2,6 +2,7 @@ package com.solo.tacocloud.controller;
 
 
 import com.solo.tacocloud.repository.IngredientRepository;
+import com.solo.tacocloud.repository.TacoRepository;
 import com.solo.tacocloud.tacos.Ingredient;
 import com.solo.tacocloud.tacos.Taco;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +28,12 @@ public class TacoDesignController {
 
     private IngredientRepository ingredientRepository;
 
+    private TacoRepository tacoRepository;
+
     @Autowired
-    public TacoDesignController(IngredientRepository ingredientRepository) {
+    public TacoDesignController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
     }
 
     @GetMapping
@@ -52,6 +56,7 @@ public class TacoDesignController {
         }
         log.warn("Taco Design Page WIP");
         System.out.println("Taco: " + designedTaco.toString());
+        tacoRepository.save(designedTaco);
         return "redirect:orders/form";
     }
 

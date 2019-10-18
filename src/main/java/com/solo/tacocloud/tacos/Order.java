@@ -9,7 +9,7 @@ import java.time.Instant;
 @Data
 public class Order {
 
-    private String id;
+    private long id;
 
     @NotBlank(message = "Name cannot be blank")
     private String name;
