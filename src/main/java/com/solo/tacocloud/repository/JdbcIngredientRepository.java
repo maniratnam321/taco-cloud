@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Slf4j
 @Repository
 public class JdbcIngredientRepository implements IngredientRepository{
 
 
+    public static final int FIRST_ELEMENT = 0;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -29,12 +32,21 @@ public class JdbcIngredientRepository implements IngredientRepository{
 
     @Override
     public Ingredient findOne(String id) {
-        return null;
+        List<Ingredient> ingredients = jdbcTemplate.query("select id, name, type from ingredient where id=?", this::mapRowToIngredient, id);
+        if(ingredients.size() > 1) {
+            log.warn("Multiple ingredients found with id: " + id + " | " + "Ingredients: " + ingredients.toString() +
+                    "\nData Integrity should be re-checked");
+        }
+        return ingredients.get(FIRST_ELEMENT) ;
     }
 
     @Override
     public boolean save(Ingredient ingredient) {
-        return false;
+        int update = jdbcTemplate.update("insert into ingredient(id, name, type) values (?, ?, ?)",
+                ingredient.getId(),
+                ingredient.getName(),
+                ingredient.getType().name());
+        return update == 1;
     }
 
     private Ingredient mapRowToIngredient(ResultSet resultSet, int rowNum) throws SQLException {

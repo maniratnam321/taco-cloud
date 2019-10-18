@@ -1,4 +1,3 @@
-truncate table ingredient;
 insert into ingredient values ('FLTO', 'Flour Tortilla', 'WRAP');
 insert into ingredient values ('COTO', 'Corn Tortilla', 'WRAP');
 insert into ingredient values ('GBF', 'Ground Beef', 'PROTEIN');

@@ -1,12 +1,15 @@
-package com.solo.tacocloud.domain;
+package com.solo.tacocloud.tacos;
 
 import lombok.Data;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import java.time.Instant;
 
 @Data
 public class Order {
+
+    private String id;
 
     @NotBlank(message = "Name cannot be blank")
     private String name;
@@ -31,4 +34,6 @@ public class Order {
 
     @Digits(integer = 3, fraction = 0, message = "CVV must be 3 digits long")
     private String creditCardCvv;
+
+    private Instant placedAt;
 }
