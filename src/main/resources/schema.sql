@@ -48,7 +48,7 @@ create table if not exists taco_order
     zip varchar(5) not null,
     creditCardNumber varchar(20) not null,
     creditCardExpiry varchar(10) not null,
-    credCardCvv varchar(30) not null,
+    creditCardCvv varchar(30) not null,
     placedAt timestamp not null
 );
 

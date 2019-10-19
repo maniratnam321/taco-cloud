@@ -5,11 +5,13 @@ import lombok.Data;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class Order {
 
-    private long id;
+    private long  id;
 
     @NotBlank(message = "Name cannot be blank")
     private String name;
@@ -36,4 +38,13 @@ public class Order {
     private String creditCardCvv;
 
     private Instant placedAt;
+
+    private List<Taco> orderedTacos;
+
+    public void addToOrder(Taco taco) {
+        if(orderedTacos == null) {
+            orderedTacos = new ArrayList<>();
+        }
+        orderedTacos.add(taco);
+    }
 }
